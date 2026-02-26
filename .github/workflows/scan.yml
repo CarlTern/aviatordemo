@@ -19,16 +19,15 @@ jobs:
           cache: 'maven'
 
       - name: Run ScanCentral SAST
-        uses: fortify/github-action@v2
-        with:
-          sast-scan: true
-          debricked-sca-scan: false
+        uses: fortify/github-action@v3
         env:
           SSC_URL: ${{vars.SSC_URL}}
           SSC_TOKEN: ${{secrets.SSC_TOKEN}}
           SC_SAST_TOKEN: ${{secrets.SC_SAST_CLIENT_AUTH_TOKEN}}
           SSC_APPVERSION: '${{vars.APPLICATION_NAME}}:${{github.ref_name}}'
           DO_SETUP: true
+          DO_SAST_SCAN: true
+          DO_DEBRICKED_SCAN: false
           SC_CLIENT_VERSION: 25.2          
           DO_WAIT: true
           DO_JOB_SUMMARY: true
