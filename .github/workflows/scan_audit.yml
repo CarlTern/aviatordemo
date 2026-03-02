@@ -37,5 +37,6 @@ jobs:
           AVIATOR_APP: "${{vars.APPLICATION_NAME}}"
           AVIATOR_TOKEN: ${{secrets.AVIATOR_TOKEN}}
           DO_SETUP: true
+          SETUP_EXTRA_OPTS: '--issue-template "Prioritized High Risk Issue Template"'
           DO_WAIT: true
           DO_JOB_SUMMARY: true
