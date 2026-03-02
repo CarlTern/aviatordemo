@@ -26,7 +26,7 @@ jobs:
         env:
           FCLI_BOOTSTRAP_VERSION: ${{vars.FCLI_VERSION}}
           SSC_URL: ${{vars.SSC_URL}}
-          SC_CLIENT_VERSION: 25.4
+          SC_CLIENT_VERSION: ${{vars.SC_CLIENT_VERSION}}
           SSC_TOKEN: ${{secrets.SSC_TOKEN}}
           SC_SAST_TOKEN: ${{secrets.SC_SAST_CLIENT_AUTH_TOKEN}}
           # Including the run_id in the app version name. This doesn't make a lot of sense in production, but enables
@@ -36,6 +36,7 @@ jobs:
           AVIATOR_APP: "${{vars.APPLICATION_NAME}}"
           AVIATOR_TOKEN: ${{secrets.AVIATOR_TOKEN}}
           DO_SETUP: true
+          SETUP_EXTRA_OPTS: '--issue-template "Prioritized High Risk Issue Template"'
           DO_WAIT: true
           DO_JOB_SUMMARY: true
 

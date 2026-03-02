@@ -29,7 +29,7 @@ jobs:
         env:
           FCLI_BOOTSTRAP_VERSION: ${{vars.FCLI_VERSION}}
           SSC_URL: ${{vars.SSC_URL}}
-          SC_CLIENT_VERSION: 25.4          
+          SC_CLIENT_VERSION: ${{vars.SC_CLIENT_VERSION}}
           SSC_TOKEN: ${{secrets.SSC_TOKEN}}
           SC_SAST_TOKEN: ${{secrets.SC_SAST_CLIENT_AUTH_TOKEN}}
           SSC_APPVERSION: "${{vars.APPLICATION_NAME}}:${{github.ref_name}}"
