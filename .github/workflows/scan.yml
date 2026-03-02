@@ -1,10 +1,14 @@
+#
+# Runs an OpenText SAST (Fortify) scan using Scan Central, using fortify/github-action@v3.
+#
+
 name: Scan
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  scan:
     runs-on: ubuntu-latest
 
     steps:

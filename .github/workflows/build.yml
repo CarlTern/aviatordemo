@@ -1,3 +1,8 @@
+#
+# Performs a Maven build of the project. Not necessary as a separate step for OpenText SAST; merely adding it here
+# as a sanity check.
+#
+
 name: Build
 
 on:

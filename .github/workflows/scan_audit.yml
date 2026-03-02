@@ -1,10 +1,16 @@
+#
+# Runs an OpenText SAST (Fortify) scan using Scan Central, using fortify/github-action@v3.
+# Also performs auditing using AppSec/SAST Aviator, showing how this has been done by merely
+# adding some options to the fortify/github-action@v3 invocation.
+#
+
 name: Scan-Audit
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  scan_audit:
     runs-on: ubuntu-latest
 
     steps:

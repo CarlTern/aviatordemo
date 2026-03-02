@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  create_pr_with_remediation:
     runs-on: ubuntu-latest
     permissions:
       contents: write
