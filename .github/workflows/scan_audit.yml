@@ -1,4 +1,4 @@
-name: Audit
+name: Scan-Audit
 
 on:
   workflow_dispatch:
@@ -18,16 +18,17 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Run AppSec Aviator audit
+      - name: Run ScanCentral SAST
         uses: fortify/github-action@v3
         env:
           SSC_URL: ${{vars.SSC_URL}}
+          SC_CLIENT_VERSION: 25.4          
           SSC_TOKEN: ${{secrets.SSC_TOKEN}}
+          SC_SAST_TOKEN: ${{secrets.SC_SAST_CLIENT_AUTH_TOKEN}}
           SSC_APPVERSION: "${{vars.APPLICATION_NAME}}:${{github.ref_name}}"
           AVIATOR_URL: ${{vars.AVIATOR_URL}}
           AVIATOR_APP: "${{vars.APPLICATION_NAME}}"
           AVIATOR_TOKEN: ${{secrets.AVIATOR_TOKEN}}
-          DO_SAST_SCAN: false
-          DO_AVIATOR_AUDIT: true
+          DO_SETUP: true
           DO_WAIT: true
           DO_JOB_SUMMARY: true
