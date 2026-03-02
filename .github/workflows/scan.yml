@@ -27,8 +27,5 @@ jobs:
           SC_SAST_TOKEN: ${{secrets.SC_SAST_CLIENT_AUTH_TOKEN}}
           SSC_APPVERSION: '${{vars.APPLICATION_NAME}}:${{github.ref_name}}'
           DO_SETUP: true
-          DO_SAST_SCAN: true
-          DO_DEBRICKED_SCAN: false
-          DO_AVIATOR_AUDIT: false
           DO_WAIT: true
           DO_JOB_SUMMARY: true

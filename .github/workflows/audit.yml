@@ -7,24 +7,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:    
-      - name: Setup Fortify tools
-        uses: fortify/github-action/setup@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
-          fcli: latest
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
 
-# To run SAST Aviator admin commands, you can run commands like this. "secrets.AVIATOR_KEY" must contain the RSA 4096 private key. It
-# must in in PEM format, removed of all newlines, and prefixed by "string:". However, normally, you wouldn't use
-# SAST Aviator admin access in the context of a build pipeline.
-#      - name: aviator admin login
-#        run: fcli aviator admin-config create --url ${{vars.AVIATOR_URL}} --tenant ${{vars.AVIATOR_TENANT}} --private-key "${{secrets.AVIATOR_KEY}}"
-#      - name: aviator app list
-#        run: fcli aviator app list
-
-
-      - name: aviator session login
-        run: fcli aviator session login --url ${{vars.AVIATOR_URL}} --token "${{secrets.AVIATOR_TOKEN}}"
-      - name: SSC session login
-        run: fcli ssc session login --url ${{vars.SSC_URL}} --token "${{secrets.SSC_TOKEN}}"
-      - name: Run SAST Aviator audit
-        run: fcli aviator ssc audit --av "${{vars.APPLICATION_NAME}}:${{github.ref_name}}" --app "${{vars.APPLICATION_NAME}}" --progress=none
+      - name: Run AppSec Aviator audit
+        uses: fortify/github-action@v3
+        env:
+          SSC_URL: ${{vars.SSC_URL}}
+          SSC_TOKEN: ${{secrets.SSC_TOKEN}}
+          SSC_APPVERSION: '${{vars.APPLICATION_NAME}}:${{github.ref_name}}'
+          AVIATOR_URL: ${{vars.AVIATOR_URL}}
+          AVIATOR_APP: ${{vars.APPLICATION_NAME}}
+          AVIATOR_TOKEN: ${{secrets.AVIATOR_TOKEN}}
+          AVIATOR_LOGIN_EXTRA_OPTS: "--tenant ${{vars.AVIATOR_TENANT}}"
+          DO_WAIT: true
+          DO_JOB_SUMMARY: true
