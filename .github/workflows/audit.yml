@@ -27,6 +27,5 @@ jobs:
           AVIATOR_URL: ${{vars.AVIATOR_URL}}
           AVIATOR_APP: ${{vars.APPLICATION_NAME}}
           AVIATOR_TOKEN: ${{secrets.AVIATOR_TOKEN}}
-          AVIATOR_LOGIN_EXTRA_OPTS: "--tenant ${{vars.AVIATOR_TENANT}}"
           DO_WAIT: true
           DO_JOB_SUMMARY: true
