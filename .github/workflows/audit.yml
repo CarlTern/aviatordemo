@@ -23,9 +23,10 @@ jobs:
         env:
           SSC_URL: ${{vars.SSC_URL}}
           SSC_TOKEN: ${{secrets.SSC_TOKEN}}
-          SSC_APPVERSION: '${{vars.APPLICATION_NAME}}:${{github.ref_name}}'
+          SSC_APPVERSION: "${{vars.APPLICATION_NAME}}:${{github.ref_name}}"
           AVIATOR_URL: ${{vars.AVIATOR_URL}}
-          AVIATOR_APP: ${{vars.APPLICATION_NAME}}
+          AVIATOR_APP: "${{vars.APPLICATION_NAME}}"
           AVIATOR_TOKEN: ${{secrets.AVIATOR_TOKEN}}
+          DO_SAST_SCAN: false
           DO_WAIT: true
           DO_JOB_SUMMARY: true
