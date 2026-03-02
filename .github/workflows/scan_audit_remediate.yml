@@ -21,37 +21,26 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Setup Fortify tools
-        uses: fortify/github-action/setup@v2
-        with:
-          fcli: 3.12.0
-
-      - name: Run ScanCentral SAST
-        uses: fortify/github-action@v2
-        with:
-          sast-scan: true
-          debricked-sca-scan: false
+      - name: Run ScanCentral SAST and Aviator audit
+        uses: fortify/github-action@v3
         env:
+          FCLI_BOOTSTRAP_VERSION: ${{vars.FCLI_VERSION}}
           SSC_URL: ${{vars.SSC_URL}}
+          SC_CLIENT_VERSION: 25.4
           SSC_TOKEN: ${{secrets.SSC_TOKEN}}
           SC_SAST_TOKEN: ${{secrets.SC_SAST_CLIENT_AUTH_TOKEN}}
-# Including the run_id in the app version name. This doesn't make a lot of sense in production, but enables
-# us to run this demo many times.          
+          # Including the run_id in the app version name. This doesn't make a lot of sense in production, but enables
+          # us to run this demo many times.
           SSC_APPVERSION: '${{vars.APPLICATION_NAME}}:${{github.ref_name}}-remediate-${{github.run_id}}'
+          AVIATOR_URL: ${{vars.AVIATOR_URL}}
+          AVIATOR_APP: "${{vars.APPLICATION_NAME}}"
+          AVIATOR_TOKEN: ${{secrets.AVIATOR_TOKEN}}
           DO_SETUP: true
-          SC_CLIENT_VERSION: 25.2
           DO_WAIT: true
           DO_JOB_SUMMARY: true
-          SETUP_EXTRA_OPTS: '--issue-template "Prioritized High Risk Issue Template - Fortify Aviator"'
 
       - name: SSC session login
         run: fcli ssc session login --url ${{vars.SSC_URL}} --token "${{secrets.SSC_TOKEN}}"
-
-      - name: aviator session login
-        run: fcli aviator session login --url ${{vars.AVIATOR_URL}} --token "${{secrets.AVIATOR_TOKEN}}"
-
-      - name: Run SAST Aviator audit
-        run: fcli aviator ssc audit --av "${{vars.APPLICATION_NAME}}:${{github.ref_name}}-remediate-${{github.run_id}}" --app "${{vars.APPLICATION_NAME}}" --progress=none
 
       - name: Apply remediations
         run: |

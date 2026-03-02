@@ -15,9 +15,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Fortify tools
-        uses: fortify/github-action/setup@v2
+        uses: fortify/github-action/setup@v3
         with:
-          fcli: latest
+          fcli: ${{vars.FCLI_VERSION}}
 
       - name: SSC session login
         run: fcli ssc session login --url ${{vars.SSC_URL}} --token "${{secrets.SSC_TOKEN}}"

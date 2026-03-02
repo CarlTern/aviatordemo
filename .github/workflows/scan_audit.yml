@@ -24,9 +24,10 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Run ScanCentral SAST
+      - name: Run ScanCentral SAST and Aviator audit
         uses: fortify/github-action@v3
         env:
+          FCLI_BOOTSTRAP_VERSION: ${{vars.FCLI_VERSION}}
           SSC_URL: ${{vars.SSC_URL}}
           SC_CLIENT_VERSION: 25.4          
           SSC_TOKEN: ${{secrets.SSC_TOKEN}}

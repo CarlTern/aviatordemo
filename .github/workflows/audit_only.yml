@@ -15,7 +15,7 @@ jobs:
       - name: Setup Fortify tools
         uses: fortify/github-action/setup@v3
         with:
-          fcli: latest
+          fcli: ${{vars.FCLI_VERSION}}
 
       - name: aviator session login
         run: fcli aviator session login --url ${{vars.AVIATOR_URL}} --token "string:${{secrets.AVIATOR_TOKEN}}"
