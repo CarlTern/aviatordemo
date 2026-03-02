@@ -39,6 +39,7 @@ jobs:
           SETUP_EXTRA_OPTS: '--issue-template "Prioritized High Risk Issue Template"'
           DO_WAIT: true
           DO_JOB_SUMMARY: true
+          DO_SAST_EXPORT: false
 
       - name: SSC session login
         run: fcli ssc session login --url ${{vars.SSC_URL}} --token "${{secrets.SSC_TOKEN}}"
