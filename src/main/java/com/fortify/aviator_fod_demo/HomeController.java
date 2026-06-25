@@ -27,9 +27,9 @@ public class HomeController {
 
     private final static String ATTRIB_MESSAGE = "message";
     private final static String ATTRIB_USERNAME = "username";
-    private final static String USERNAME = "Please provide a username.";
-    private final static String PASSWORD = "Please provide a password.";
-    private final static String INVALID_PASSWORD = "Provided password is not allowed.";
+    private final static String U_PROMPT = "Please provide a username.";
+    private final static String P_PROMPT = "Please provide a password.";
+    private final static String INVALID_P_PROMPT = "Provided password is not allowed.";
     private final static String WRONG_CREDS = "Wrong credentials.";
     private final static String SUCCESS = "Logged in successfully.";
 
@@ -41,11 +41,11 @@ public class HomeController {
         String username = credentials.getUsername();
         String password = credentials.getPassword();
         if(username.isEmpty())
-            request.setAttribute(ATTRIB_MESSAGE, USERNAME);
+            request.setAttribute(ATTRIB_MESSAGE, U_PROMPT);
         else if(password.isEmpty())
-            request.setAttribute(ATTRIB_MESSAGE, PASSWORD);
+            request.setAttribute(ATTRIB_MESSAGE, P_PROMPT);
         else if(isInvalidPassword(password))
-            request.setAttribute(ATTRIB_MESSAGE, INVALID_PASSWORD);
+            request.setAttribute(ATTRIB_MESSAGE, INVALID_P_PROMPT);
         else {
             System.out.println("username: " + username);
             System.out.println("password: " + password);
@@ -53,7 +53,7 @@ public class HomeController {
 
             /* Verify whether credentials are correct. */
             boolean credentialsCorrect = false;
-            try(Connection connection = DriverManager.getConnection("localhost:1234", "dbuser", "secretpwd")) {
+            try(Connection connection = DriverManager.getConnection("localhost:1234", "dbuser", "")) {
                 try (Statement statement = connection.createStatement()) {
                     try (ResultSet rs = statement.executeQuery(
                             "SELECT 1 FROM users WHERE username = '" + username + "' AND password = '" + password + "'")) {
