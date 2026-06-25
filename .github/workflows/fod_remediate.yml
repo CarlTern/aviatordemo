@@ -24,8 +24,8 @@ jobs:
           fcli fod session login \
             --url "${{ vars.FOD_URL }}" \
             --tenant "${{ secrets.FOD_TENANT }}" \
-            --client-id "${{ secrets.FOD_CLIENT_ID }}" \
-            --client-secret "${{ secrets.FOD_CLIENT_SECRET }}"
+            --user "${{ secrets.FOD_USER }}" \
+            --password "${{ secrets.FOD_PAT }}"
 
       - name: Apply remediations
         run: fcli aviator fod apply-remediations --release "${{ vars.FOD_RELEASE }}" --source-dir .
