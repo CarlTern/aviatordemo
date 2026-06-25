@@ -28,7 +28,7 @@ jobs:
             --password "${{ secrets.FOD_PAT }}"
 
       - name: Apply remediations
-        run: fcli fod aviator apply-remediations --release "${{ vars.FOD_RELEASE }}"
+        run: fcli fod aviator apply-remediations --release  "${{ vars.FOD_RELEASE }}"
 
       - name: FoD session logout
         if: always()
