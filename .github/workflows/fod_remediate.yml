@@ -1,4 +1,4 @@
-name: Remediate
+name: FoD Remediate
 
 on:
   workflow_dispatch:
